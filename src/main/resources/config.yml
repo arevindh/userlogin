@@ -110,6 +110,8 @@ bungeeCord:
   # Server to send the player to, when logged in
   spawnServer: 'LOBBY'
 
+register:
+  enabled: true
 
 # Database options
 database:
