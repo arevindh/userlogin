@@ -1,5 +1,7 @@
 package com.elchologamer.userlogin.commands;
 
+import com.elchologamer.userlogin.UserLogin;
+import com.elchologamer.userlogin.api.event.AuthenticationEvent;
 import com.elchologamer.userlogin.api.types.AuthType;
 import com.elchologamer.userlogin.util.database.Database;
 import com.elchologamer.userlogin.util.extensions.QuickMap;
@@ -14,9 +16,12 @@ public class RegisterCommand extends AuthCommand {
         super("register", AuthType.REGISTER, 2);
     }
 
+    private static final UserLogin plugin = UserLogin.getPlugin();
+
     @Override
     protected boolean authenticate(ULPlayer ulPlayer, String[] args) {
         Database db = getPlugin().getDB();
+        FileConfiguration config = plugin.getConfig();
 
         // Check if player is not already registered
         UUID uuid = ulPlayer.getPlayer().getUniqueId();
@@ -25,8 +30,15 @@ public class RegisterCommand extends AuthCommand {
             return false;
         }
 
+        boolean registerEnabled = config.getBoolean("register.enabled");
+
+        if (!registerEnabled) {
+            ulPlayer.sendPathMessage("messages.register_disabled");
+            return false;
+        }
+
         String password = args[0];
-        FileConfiguration config = getPlugin().getConfig();
+
         int minChars = config.getInt("password.minCharacters", 0);
         int maxChars = config.getInt("password.maxChars", 128);
 

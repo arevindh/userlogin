@@ -35,6 +35,7 @@ messages:
   timeout: 'Te has quedado mucho tiempo sin logearte'
   login_announcement: '&e{player} se ha unido al servidor!'
   commands_disabled: '&cTienes que logearte para usar comandos!'
+  register_disabled: 'Registration Disabled. Please try later.'
   help:
     - '&a--------- | &2[Ayuda de UserLogin] &a| ---------'
     - '&2/ul help: &aMuestra esta lista de ayuda'

@@ -118,7 +118,8 @@
             <groupId>com.github.games647</groupId>
             <artifactId>fastlogin</artifactId>
             <version>1.10</version>
-            <scope>provided</scope>
+            <systemPath>${project.basedir}/lib/FastLogin.jar</systemPath>
+            <scope>system</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

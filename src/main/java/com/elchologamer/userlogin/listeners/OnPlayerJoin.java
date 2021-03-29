@@ -55,10 +55,17 @@ public class OnPlayerJoin extends BaseListener {
 
         ulPlayer.activateTimeout();
 
-        // Send respective welcome message
-        String path = "messages.welcome." + (UserLoginAPI.isRegistered(p) ? "registered" : "unregistered");
-        ulPlayer.sendPathMessage(path, new QuickMap<>("player", p.getName()));
+        boolean registerEnabled = plugin.getConfig().getBoolean("register.enabled");
 
-        ulPlayer.activateRepeatingMessage(path);
+        if (registerEnabled) {
+            // Send respective welcome message
+            String path = "messages.welcome." + (UserLoginAPI.isRegistered(p) ? "registered" : "unregistered");
+            ulPlayer.sendPathMessage(path, new QuickMap<>("player", p.getName()));
+            ulPlayer.activateRepeatingMessage(path);
+        }
+        else{
+            ulPlayer.sendPathMessage("messages.register_disabled");
+        }
+
     }
 }
